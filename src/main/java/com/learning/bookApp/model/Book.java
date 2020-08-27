@@ -1,19 +1,19 @@
 package com.learning.bookApp.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Book {
 	private int isbn;
 	private String title;
 	private String author;
-	private LocalDate publishedDate;
+	private Date publishedDate;
 	private String publisherName;
 	private double price;
 	
 	public Book() {}
 
 	public Book(int isbn, String title, String author, 
-			LocalDate publishedDate, String publisherName, double price) {
+			Date publishedDate, String publisherName, double price) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
@@ -47,12 +47,12 @@ public class Book {
 		this.author = author;
 	}
 
-	public LocalDate getPublishedDate() {
+	public Date getPublishedDate() {
 		return publishedDate;
 	}
 
-	public void setPublishedDate(LocalDate publishedDate) {
-		this.publishedDate = publishedDate;
+	public void setPublishedDate(Date date) {
+		this.publishedDate = date;
 	}
 
 	public String getPublisherName() {
