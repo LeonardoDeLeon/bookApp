@@ -1,10 +1,7 @@
 package com.learning.bookApp.dao;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,25 +15,59 @@ public class BookRepositoryImpl implements BookRepository{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private static final String SQL = "select * from book";
+    @Override
+    public int save(Book book) {
+        return jdbcTemplate.update(
+                "insert into book (Title,Author,PublishedDate,PublisherName,Price) values(?,?,?,?,?)",
+                book.getTitle(), book.getAuthor(), 
+                book.getPublishedDate(), book.getPublisherName(), 
+                book.getPrice());
+    }
+
+    @Override
+    public int update(Book book) {
+        return jdbcTemplate.update(
+                "update book set Title = ?, Author = ?, PublishedDate = ?, PublisherName = ?, Price = ? where isbn = ?",
+                book.getTitle(), book.getAuthor(), 
+                book.getPublishedDate(), book.getPublisherName(), 
+                book.getPrice(), book.getIsbn());
+    }
 	
 	@Override
 	public List<Book> findAll() {
-		List<Book> books = new ArrayList<>();
-		List<Map<String,Object>> rows = jdbcTemplate.queryForList(SQL);
-		
-		for (Map<String,Object> row : rows) {
-			Book book = new Book();
-			book.setIsbn((int)row.get("ISBN"));
-			book.setTitle((String)row.get("Title"));
-			book.setAuthor((String)row.get("Author"));
-			book.setPublishedDate((Date)row.get("PublishedDate"));
-			book.setPublisherName((String)row.get("PublisherName"));
-			BigDecimal bad = (BigDecimal) row.get("Price");
-			book.setPrice(bad.doubleValue());
-			
-			books.add(book);
-		}
-		return books;
+		return jdbcTemplate.query("select * from book",
+				(rs,row)->new Book(
+						rs.getInt("ISBN"),
+						rs.getString("Title"),
+						rs.getString("Author"),
+						rs.getDate("PublishedDate"),
+						rs.getString("PublisherName"),
+						rs.getBigDecimal("Price").doubleValue()
+						)
+				);
 	}
+	
+	@Override
+	public Optional<Book> findById(int isbn) {
+		return jdbcTemplate.queryForObject(
+				"select * from book where isbn = ?", 
+				new Object[]{isbn},
+				(rs,row) -> 
+					Optional.of(new Book(
+							rs.getInt("ISBN"),
+							rs.getString("Title"),
+							rs.getString("Author"),
+							rs.getDate("PublishedDate"),
+							rs.getString("PublisherName"),
+							rs.getBigDecimal("Price").doubleValue()
+					))
+		);
+	}
+	
+    @Override
+    public int deleteById(int isbn) {
+        return jdbcTemplate.update(
+                "delete from book where isbn = ?",
+                isbn);
+    }
 }

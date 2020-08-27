@@ -23,6 +23,15 @@ public class Book {
 		this.price = price;
 	}
 
+	public Book(String title, String author, 
+			Date publishedDate, String publisherName, double price) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.publishedDate = publishedDate;
+		this.publisherName = publisherName;
+		this.price = price;
+	}
 	public int getIsbn() {
 		return isbn;
 	}
