@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Book Listing page!</title>
+        <title>Search Book Result page!</title>
     </head>
     <body>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-      	<a th:href="@{/addBookForm}">
-	        <span>Add New Books</span>
-	    </a>
-      	<a th:href="@{/searchBookForm}">
-	        <span>Search Books</span>
-	    </a>
+
        <table>
        <tr>
             <th>ISBN #</th>
@@ -20,7 +15,7 @@
             <th>Publisher Name</th>
             <th>Price</th>
        </tr>
-       <tr th:each="book : ${books}">
+       <tr th:each="book : ${bookList}">
 	        <td th:text="${book.getIsbn()}">1</td>
 	        <td th:text="${book.getTitle()}">Product Name ...</td>
 	        <td th:text="${book.getAuthor()}">Author ...</td>
@@ -44,6 +39,7 @@
 			</td>
     	</tr>
     	</table>
+    	<p>Click <a th:href="@{/bookListing}">here</a> to go back to book listing</p>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>

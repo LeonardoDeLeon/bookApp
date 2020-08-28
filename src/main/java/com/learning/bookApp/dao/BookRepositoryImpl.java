@@ -70,4 +70,21 @@ public class BookRepositoryImpl implements BookRepository{
                 "delete from book where isbn = ?",
                 isbn);
     }
+    
+    @Override
+    public List<Book> findByTitle(String title) {
+        return jdbcTemplate.query(
+                "select * from book where title like ?",
+                new Object[]{"%" + title },
+                (rs, rowNum) ->
+                        new Book(
+                                rs.getInt("ISBN"),
+                                rs.getString("Title"),
+                                rs.getString("Author"),
+    							rs.getDate("PublishedDate"),
+    							rs.getString("PublisherName"),
+    							rs.getBigDecimal("Price").doubleValue()
+                        )
+        );
+    }
 }

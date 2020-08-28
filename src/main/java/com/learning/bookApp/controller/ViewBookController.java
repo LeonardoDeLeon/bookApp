@@ -9,21 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.learning.bookApp.dao.BookRepository;
 
 @Controller
-public class BookListingController {
+public class ViewBookController {
 	@Autowired
 	BookRepository repo;
 	
-	@GetMapping("/bookListing")
-	public String bookListing(Model model) {
-		model.addAttribute("books",repo.findAll());
-		return "bookListing";
-	}
-	
-	@GetMapping("/deleteBookResultView/{id}")
-	public String delBook(@PathVariable String id, Model model) {
-		model.addAttribute("result",repo.deleteById(Integer.parseInt(id)));
-		return "deleteBookResultView";
+	@GetMapping("/viewBookDetail/{id}")
+	public String viewBook(@PathVariable String id, Model model) {
+		model.addAttribute("book",repo.findById(Integer.parseInt(id)).orElseThrow(IllegalArgumentException::new));
+		return "viewBookDetail";
 	}
 
-	
 }

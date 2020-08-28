@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Search Book Form Page!</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	    <form autocomplete="off" action="#" th:action="@{/searchBookForm}" th:object="${searchBookForm}" method="post" class="form-signin" role="form">
+			<div class="form-group">
+				<div class="">
+					<input type="text" th:field="*{searchField}" placeholder="Search by title" class="form-control" />
+				</div>
+				<div>
+					<span th:if="${#fields.hasErrors('searchField')}" th:errors="*{searchField}">..</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="">
+					<button type="submit" class="btn btn-primary btn-block">Search</button>
+				</div>
+			</div>
+		</form>
+    	<a href="/bookListing">Cancel.  Go back to Book Listing</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>

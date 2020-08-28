@@ -28,6 +28,6 @@ public class BookService {
 				Date.valueOf(addBookForm.getPublishedDate()),
 				addBookForm.getPublisherName(),
 				Double.parseDouble(addBookForm.getPrice()));
-return book;
+		return book;
 	}
 }

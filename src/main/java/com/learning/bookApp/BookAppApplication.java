@@ -35,7 +35,6 @@ public class BookAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		log.info("runJDBC()");
 		runJDBC();
 	}
