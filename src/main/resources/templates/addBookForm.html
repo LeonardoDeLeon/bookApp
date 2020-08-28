@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Book Form</title>
+<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+</head>
+<body style="background-color: #ededed;">
+	<div style="background-color: #337ab7; height: 50px;"></div>
+	<div class="container-fluid" style="margin-top: 30px;">
+
+		<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+			
+			<form autocomplete="off" action="#" th:action="@{/addBookForm}" th:object="${addBookForm}" method="post" class="form-signin" role="form">
+				<h3 class="form-signin-heading">Add New Book Form</h3>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{title}" placeholder="Title" class="form-control" />
+					</div>
+					<div>
+						<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">..</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{author}" placeholder="Author" class="form-control" />
+					</div>
+					<div>
+						<span th:if="${#fields.hasErrors('author')}" th:errors="*{author}">..</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{publishedDate}" placeholder="Published Date(YYYY-MM-DD)" class="form-control" />
+					</div>
+					<div>
+						<span th:if="${#fields.hasErrors('publishedDate')}" th:errors="*{publishedDate}">..</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{publisherName}" placeholder="Publisher Name" class="form-control" />
+					</div>
+					<div>
+						<span th:if="${#fields.hasErrors('publisherName')}" th:errors="*{publisherName}">..</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{price}" placeholder="Price" class="form-control" />
+					</div>
+					<div>
+						<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<button type="submit" class="btn btn-primary btn-block">Add New Book</button>
+					</div>
+				</div>
+				<a href="/bookListing">Cancel.  Go back to Book Listing</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

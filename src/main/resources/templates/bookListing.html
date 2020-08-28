@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Book Listing page!</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+      	<a th:href="@{/addBookForm}">
+	        <span>Add New Books</span>
+	    </a>
+       <table>
+       <tr>
+            <th>ISBN #</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>Publisher Name</th>
+            <th>Price</th>
+       </tr>
+       <tr th:each="book : ${books}">
+	        <td th:text="${book.getIsbn()}">1</td>
+	        <td><a href="#" th:text="${book.getTitle()}">Product Name ...</a></td>
+	        <td th:text="${book.getAuthor()}">Author ...</td>
+	        <td th:text="${book.getPublishedDate()}">PublishedDate...</td>
+	        <td th:text="${book.getPublisherName()}">PublisherName ...</td>
+	        <td th:text="${book.getPrice()}">Price ...</td>
+	       	<td>
+			    <a th:href="@{'/updateBookForm/'+${book.getIsbn()}}">
+			        <span>Update</span>
+			    </a>
+			</td>
+	        <td>
+			    <a th:href="@{'/deleteBookResultView/'+${book.getIsbn()}}">
+			        <span>Delete</span>
+			    </a>
+			</td>
+    	</tr>
+    	</table>
+        <p>Click <a th:href="@{/bookListing}">here</a> to go back to book listing</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>

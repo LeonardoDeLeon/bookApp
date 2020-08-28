@@ -1,15 +1,33 @@
 package com.learning.bookApp.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.Date;
+
 import org.springframework.stereotype.Service;
 
-import com.learning.bookApp.dao.BookRepository;
+import com.learning.bookApp.model.Book;
+import com.learning.bookApp.validator.AddBookForm;
+import com.learning.bookApp.validator.UpdateBookForm;
 
 @Service
 public class BookService {
-//	@Autowired
-//	private BookRepository repo;
-	
-	
 
+	public Book initBookFromUpdateBookForm(UpdateBookForm updateBookForm) throws Exception {
+		System.out.println("Title : "+ updateBookForm.getTitle());
+		Book book = new Book(Integer.parseInt(updateBookForm.getIsbn()),
+								updateBookForm.getTitle(),
+								updateBookForm.getAuthor(),
+								Date.valueOf(updateBookForm.getPublishedDate()),
+								updateBookForm.getPublisherName(),
+								Double.parseDouble(updateBookForm.getPrice()));
+		return book;
+	}
+
+	public Book initBookFromAddBookForm(AddBookForm addBookForm) {
+		Book book = new Book(addBookForm.getTitle(),
+				addBookForm.getAuthor(),
+				Date.valueOf(addBookForm.getPublishedDate()),
+				addBookForm.getPublisherName(),
+				Double.parseDouble(addBookForm.getPrice()));
+return book;
+	}
 }
