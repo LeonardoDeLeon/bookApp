@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View Book Detail Page!</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h1 th:text="${book.getTitle()}"/>
+        <h2>By: </h2><h2 th:text="${book.getAuthor()}">Author </h2>
+        
+       <p>Click <a th:href="@{/bookListing}">here</a> to go back to book listing</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>
