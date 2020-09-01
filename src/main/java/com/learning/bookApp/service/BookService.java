@@ -12,7 +12,7 @@ import com.learning.bookApp.validator.UpdateBookForm;
 public class BookService {
 
 	public Book initBookFromUpdateBookForm(UpdateBookForm updateBookForm) throws Exception {
-		System.out.println("Title : "+ updateBookForm.getTitle());
+		
 		Book book = new Book(Integer.parseInt(updateBookForm.getIsbn()),
 								updateBookForm.getTitle(),
 								updateBookForm.getAuthor(),

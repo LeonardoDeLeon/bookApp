@@ -1,4 +1,4 @@
-package com.learning.bookApp.validator;
+	package com.learning.bookApp.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,10 +15,7 @@ public class SearchBookFormValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		SearchBookForm searchBookForm = (SearchBookForm) target;
-		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "searchField", "NotEmpty.searchBookForm.searchField");
-	
 	}
 
 }

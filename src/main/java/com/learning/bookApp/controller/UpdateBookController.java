@@ -55,7 +55,7 @@ public class UpdateBookController {
 		bookForm.setPublishedDate(book.getPublishedDate().toString());
 		bookForm.setPublisherName(book.getPublisherName());
 		bookForm.setPrice(Double.toString(book.getPrice()));
-		modelAndView.addObject("bookForm",bookForm);
+		modelAndView.addObject("updateBookForm",bookForm);
 		modelAndView.setViewName("updateBookForm"); //resources/template/addBookForm
 		System.out.println("modelAndView: "+modelAndView);
 		return modelAndView;
@@ -67,11 +67,12 @@ public class UpdateBookController {
 			BindingResult result) throws Exception {
 		
 		model.addAttribute("updateBookForm",updateBookForm);
-		Book updatedBook = bookService.initBookFromUpdateBookForm(updateBookForm);
+		
 		// if form has errors then prompt user to make corrections
-		if (result.hasErrors()) return "addBookForm";
+		if (result.hasErrors()) return "updateBookForm";
 		
 		//if no errors in the form, then proceed with adding the new book
+		Book updatedBook = bookService.initBookFromUpdateBookForm(updateBookForm);
 		model.addAttribute("result",bookRepository.update(updatedBook));
 		return "updateBookResultView";
 	}

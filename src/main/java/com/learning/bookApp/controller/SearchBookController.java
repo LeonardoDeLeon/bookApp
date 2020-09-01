@@ -62,15 +62,13 @@ public class SearchBookController {
 	public String searchBook(Model model,
 			@ModelAttribute("searchBookForm") @Validated SearchBookForm searchBookForm, 
 			BindingResult result) throws Exception {
-		System.out.println("b4 search");
-		model.addAttribute("searchBookForm",searchBookForm);
 		
+		model.addAttribute("searchBookForm",searchBookForm);
 		// if form has errors then prompt user to make corrections
 		if (result.hasErrors()) return "searchBookForm";
 		
 		//if no errors in the form, then proceed with adding the new book
 		model.addAttribute("bookList",bookRepository.findByTitle(searchBookForm.getSearchField()));
-		System.out.println("aftA search");
 		return "searchBookResultView";
 	}
 }

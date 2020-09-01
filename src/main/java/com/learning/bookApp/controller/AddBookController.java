@@ -60,11 +60,12 @@ public class AddBookController {
 			BindingResult result) throws Exception {
 		
 		model.addAttribute("addBookForm",addBookForm);
-		Book newBook = bookService.initBookFromAddBookForm(addBookForm);
+		
 		// if form has errors then prompt user to make corrections
 		if (result.hasErrors()) return "addBookForm";
 		
 		//if no errors in the form, then proceed with adding the new book
+		Book newBook = bookService.initBookFromAddBookForm(addBookForm);
 		model.addAttribute("result",bookRepository.save(newBook));
 		return "addBookResultView";
 	}
