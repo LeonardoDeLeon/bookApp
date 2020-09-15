@@ -68,7 +68,7 @@ public class SearchBookController {
 		if (result.hasErrors()) return "searchBookForm";
 		
 		//if no errors in the form, then proceed with adding the new book
-		model.addAttribute("bookList",bookRepository.findByTitle(searchBookForm.getSearchField()));
+		model.addAttribute("bookList",bookRepository.searchBookByStrLit(searchBookForm.getSearchField()));
 		return "searchBookResultView";
 	}
 }

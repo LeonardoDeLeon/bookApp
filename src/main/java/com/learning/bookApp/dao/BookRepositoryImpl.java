@@ -72,10 +72,20 @@ public class BookRepositoryImpl implements BookRepository{
     }
     
     @Override
-    public List<Book> findByTitle(String title) {
+    public List<Book> searchBookByStrLit(String strLit) {
         return jdbcTemplate.query(
-                "select * from book where title like ?",
-                new Object[]{"%" + title },
+                "select * from book where isbn like ?"
+                + " or title like ?"
+                + " or author like ?"
+                + " or publisheddate like ?"
+                + " or publishername like ?"
+                + " or price like ?",
+                new Object[]{"%" + strLit + "%"
+                		, "%" + strLit + "%"
+                		, "%" + strLit + "%"
+                		, "%" + strLit + "%"
+                		, "%" + strLit + "%"
+                		, "%" + strLit + "%"},
                 (rs, rowNum) ->
                         new Book(
                                 rs.getInt("ISBN"),
