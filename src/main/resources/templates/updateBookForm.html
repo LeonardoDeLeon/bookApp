@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Update Book Form</title>
-<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-
 </head>
 <body style="background-color: #ededed;">
 	<div style="background-color: #337ab7; height: 50px;"></div>
@@ -14,7 +12,7 @@
 			
 			<form autocomplete="off" action="#" th:action="@{/updateBookForm}" th:object="${updateBookForm}" method="post" class="form-signin" role="form">
 				<h3 class="form-signin-heading">Update Book Form</h3>				<div class="form-group">
-				<div class="">
+				<div class="form-group">
 						<input type="text" th:field="*{isbn}" placeholder="" class="form-control" />
 					</div>
 				</div>

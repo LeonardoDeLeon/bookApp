@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Search Book Form Page!</title>
     </head>
-    <body>
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-	    <form autocomplete="off" action="#" th:action="@{/searchBookForm}" th:object="${searchBookForm}" method="post" class="form-signin" role="form">
+    <body style="background-color: #ededed;">
+   
+	<div class="container-fluid" style="margin-top: 30px;">
+
+		<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+	    <form autocomplete="off" action="#" th:action="@{/searchBookForm}" th:object="${searchBookForm}" method="post" class="form-sign-in" role="form">
+			<h3 class="form-signin-heading">Search Book Form</h3>
 			<div class="form-group">
 				<div class="">
 					<input type="text" th:field="*{searchField}" placeholder="Search by title" class="form-control" />
@@ -19,10 +24,10 @@
 					<button type="submit" class="btn btn-primary btn-block">Search</button>
 				</div>
 			</div>
+			<a href="/bookListing">Cancel.  Go back to Book Listing</a> 
 		</form>
-    	<a href="/bookListing">Cancel.  Go back to Book Listing</a>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+		</div>
+	</div>
+    	       
     </body>
 </html>

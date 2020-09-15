@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Book Listing page!</title>
     </head>
     <body>
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-      	<a th:href="@{/addBookForm}">
+      	<a class="btn btn-primary" th:href="@{/addBookForm}">
 	        <span>Add New Books</span>
 	    </a>
-      	<a th:href="@{/searchBookForm}">
+      	<a class="btn btn-primary" th:href="@{/searchBookForm}">
 	        <span>Search Books</span>
 	    </a>
-       <table>
+       <table class="table table-striped">
+       <thead>
        <tr>
-            <th>ISBN #</th>
-            <th>Book Title</th>
-            <th>Author</th>
-            <th>Published Date</th>
-            <th>Publisher Name</th>
-            <th>Price</th>
+            <th scope="col">ISBN #</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Published Date</th>
+            <th scope="col">Publisher Name</th>
+            <th scope="col">Price</th>
        </tr>
+       </thead>
+       <tbody>
        <tr th:each="book : ${books}">
 	        <td th:text="${book.getIsbn()}">1</td>
 	        <td th:text="${book.getTitle()}">Product Name ...</td>
@@ -28,24 +32,25 @@
 	        <td th:text="${book.getPublisherName()}">PublisherName ...</td>
 	        <td th:text="${book.getPrice()}">Price ...</td>
 	       	<td>
-			    <a th:href="@{'/updateBookForm/'+${book.getIsbn()}}">
+			    <a class="btn btn-primary" th:href="@{'/updateBookForm/'+${book.getIsbn()}}">
 			        <span>Update</span>
 			    </a>
 			</td>
 	        <td>
-			    <a th:href="@{'/deleteBookResultView/'+${book.getIsbn()}}">
+			    <a class="btn btn-secondary" th:href="@{'/deleteBookResultView/'+${book.getIsbn()}}">
 			        <span>Delete</span>
 			    </a>
 			</td>
 			<td>
-			    <a th:href="@{'/viewBookDetail/'+${book.getIsbn()}}">
+			    <a class="btn btn-info" th:href="@{'/viewBookDetail/'+${book.getIsbn()}}">
 			        <span>View</span>
 			    </a>
 			</td>
     	</tr>
+    	</tbody>
     	</table>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input class="form-group btn btn-dark" type="submit" value="Sign Out"/>
         </form>
     </body>
 </html>
